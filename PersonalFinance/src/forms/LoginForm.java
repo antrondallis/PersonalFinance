@@ -8,7 +8,7 @@ package forms;
 import businesslogic.UserModelRepository;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import models.UserModel;
+import models.*;
 import staticfiles.ColorScheme;
 
 /**
@@ -23,6 +23,7 @@ public class LoginForm extends javax.swing.JFrame {
      */
     public LoginForm() {
         initComponents();
+        setComponents();
         setColorScheme();
     }
 
@@ -145,6 +146,9 @@ public class LoginForm extends javax.swing.JFrame {
         lblRegisterAcct.setText("Click here to create an account if you don't already have one");
         lblRegisterAcct.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblRegisterAcct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblRegisterAcctMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblRegisterAcctMouseEntered(evt);
             }
@@ -248,15 +252,16 @@ public class LoginForm extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         UserModel user = new UserModel(txtUserName.getText(), txtPassword.getText());
         
-        UserModel authenticatedUser = userModelRepository.AuthenticateUser(user);
-        
+        userModelRepository.AuthenticateUser(user);
+        String temp = AuthenticatedUser.userName;
         //the user returned a valid id greater than zero = valid user
         JFrame frame = new JFrame("frame");
-        if(authenticatedUser.userId > 0){
-            JOptionPane.showMessageDialog(null, "YES!!", "You did it", JOptionPane.DEFAULT_OPTION);
+        if(AuthenticatedUser.userId > 0){
+            
+            JOptionPane.showMessageDialog(null, "Welcome " + AuthenticatedUser.userName + "!!", "Login Successful", JOptionPane.DEFAULT_OPTION);
         }
         else{
-            JOptionPane.showMessageDialog(null, "NO!!", "You did NOT it", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Incorrect Username or Password!!", "Login Error", JOptionPane.ERROR_MESSAGE);
         }
         
         
@@ -269,6 +274,12 @@ public class LoginForm extends javax.swing.JFrame {
     private void lblRegisterAcctMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegisterAcctMouseExited
         lblRegisterAcct.setForeground(ColorScheme.quaternaryColor);
     }//GEN-LAST:event_lblRegisterAcctMouseExited
+
+    private void lblRegisterAcctMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegisterAcctMouseClicked
+        this.setVisible(false);
+        new RegisterForm().setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblRegisterAcctMouseClicked
 
     /**
      * @param args the command line arguments
@@ -304,6 +315,9 @@ public class LoginForm extends javax.swing.JFrame {
                 new LoginForm().setVisible(true);
             }
         });
+    }
+    
+    private void setComponents(){
     }
     
     private void setColorScheme(){

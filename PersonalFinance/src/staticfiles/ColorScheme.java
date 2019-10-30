@@ -17,4 +17,6 @@ public class ColorScheme {
     public static Color tertiaryColor = new java.awt.Color(81, 203, 32);
     public static Color quaternaryColor = new java.awt.Color(255, 255, 255);
     public static Color quinaryColor = new java.awt.Color(191, 192, 192);
+    
+    public static Color errorColor = new java.awt.Color(255, 0, 0);
 }

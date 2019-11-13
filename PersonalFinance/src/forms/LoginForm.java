@@ -25,6 +25,8 @@ public class LoginForm extends javax.swing.JFrame {
         initComponents();
         setComponents();
         setColorScheme();
+        txtUserName.setText("testuser");
+        txtPassword.setText("test");
     }
 
     /**
@@ -259,6 +261,8 @@ public class LoginForm extends javax.swing.JFrame {
         if(AuthenticatedUser.userId > 0){
             
             JOptionPane.showMessageDialog(null, "Welcome " + AuthenticatedUser.userName + "!!", "Login Successful", JOptionPane.DEFAULT_OPTION);
+            this.dispose();
+            new MainMenu().setVisible(true);
         }
         else{
             JOptionPane.showMessageDialog(null, "Incorrect Username or Password!!", "Login Error", JOptionPane.ERROR_MESSAGE);

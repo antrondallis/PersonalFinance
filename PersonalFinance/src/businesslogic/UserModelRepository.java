@@ -109,4 +109,9 @@ public class UserModelRepository {
         
         return returnResult;
     }
+    
+    public void LogoffUser(){
+        AuthenticatedUser.userId = 0;
+        AuthenticatedUser.userName = "";
+    }
 }
